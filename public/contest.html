@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <title>Quiz</title>
+  <script src="scripts/formUtils.js"></script>
+  <script src="scripts/xhrUtils.js"></script>
+  <script>
+    const drawQuestion = (question) => {
+      const { id } = question;
+      console.log('question', question);
+      const questionEle = document.createElement('div');
+      questionEle.innerText = question.question;
+      const parent = document.querySelector('#login-form');
+      parent.appendChild(questionEle);
+      return;
+    };
+
+    const fetchQuestion = (xhr) => {
+      const url = '/contests/1';
+      xhrGet(url, (xhr) => drawQuestion(JSON.parse(xhr.response)));
+    };
+
+    const onFailure = (xhr) => {
+      alert('Failed');
+    };
+
+    const joinContest = () => {
+      const body = readFormData('#login-form');
+      const url = '/contests/1/add-player';
+      xhrPost(url, fetchQuestion, onFailure, body.toString());
+    };
+  </script>
+</head>
+
+<body>
+
+  <h1>Quiz</h1>
+  <form id="login-form">
+    <div><input type="name" name="name" placeholder="Enter your name"></div>
+    <button type="button" onclick="joinContest()">Join Quiz</button>
+  </form>
+</body>
+
+</html>
