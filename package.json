@@ -1,0 +1,22 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "description": "Quiz",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dileepsa/quiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dileepsa/quiz/issues"
+  },
+  "homepage": "https://github.com/dileepsa/quiz#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
