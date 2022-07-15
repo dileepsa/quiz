@@ -1,0 +1,48 @@
+{
+  "id": "1",
+  "name": "quiz1",
+  "questions": [
+    {
+      "id": "1",
+      "question": "where is Bangalore ?",
+      "options": [
+        {
+          "id": "1",
+          "option": "Delhi"
+        },
+        {
+          "id": "2",
+          "option": "Karnataka"
+        },
+        {
+          "id": "3",
+          "option": "Andhra Pradesh"
+        }
+      ],
+      "answer": "2"
+    },
+    {
+      "id": "2",
+      "question": "Who is best friend of Ankamma?",
+      "options": [
+        {
+          "id": "1",
+          "option": "Swamiji"
+        },
+        {
+          "id": "2",
+          "option": "Jayanth"
+        },
+        {
+          "id": "3",
+          "option": "Guptaji"
+        },
+        {
+          "id": "4",
+          "option": "AKC"
+        }
+      ],
+      "answer": "4"
+    }
+  ]
+}
