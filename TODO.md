@@ -1,9 +1,6 @@
 **TODO**
 
-- [ ] Store the answers.
-- [ ] send the answers to backend for validation.
 - [ ] Model the player data.
-- [ ] Show the result of quiz.
 - [ ] Consider an entity for controlling quiz.
 - [ ] create Contests.
 - [ ] consider an entity for contest.
@@ -11,6 +8,9 @@
 
 **DONE**
 
+- [x] send the answers to backend for validation.
+- [x] Show the result of quiz.
+- [x] Store the answers.
 - [x] Create script files for frontend code.
 - [x] Separate the handlers into files.
 - [x] show the next question after clicking next button.

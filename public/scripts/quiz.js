@@ -1,23 +1,33 @@
-const questionTemplate = ` <form id="question-form">
+const questionTemplate = ` <form id="questionform" name="questionform">
 <fieldset class="options">
   <h2>__QUESTION__</h2>
-  <input type="radio" id="1" name="option">
+  <input type="radio" value="1" name="option">
   <label for="1">__OPTION1__</label>
 
-  <input type="radio" id="2" name="option">
+  <input type="radio" value="2" name="option">
   <label for="2">__OPTION2__</label>
   
-  <input type="radio" id="3" name="option">
+  <input type="radio" value="3" name="option">
   <label for="3">__OPTION3__</label>
 </fieldset>
 <div><button type="button" id="action">__ACTION__</button></div>
 </form>`;
+const answers = [];
 
-const showResult = () => {
+const drawResults = (xhr) => {
   const body = document.querySelector('body');
-  body.innerHTML = 'Quiz completed';
-  return;
+
+  const validations = JSON.parse(xhr.response);
+  const total = validations.length;
+  const correct = validations.filter(x => x.result).length;
+  body.innerHTML = `correct: ${correct} out of ${total}`
 }
+
+const validateResponses = () => {
+  const url = '/contests/1/validate';
+  xhrPost(url, drawResults, onFailure, JSON.stringify(answers), 'json');
+  return;
+};
 
 const createQuestionHtml = (question, action) => {
   let content = questionTemplate.replace('__QUESTION__', question.question);
@@ -30,23 +40,30 @@ const createQuestionHtml = (question, action) => {
   return content;
 };
 
+const storeResponse = (question) => {
+  const selected = document.questionform.option.value;
+  const { id } = question;
+  const answer = { questionId: id, playerChoice: selected };
+  answers.push(answer);
+};
+
 const drawQuestion = ({ question, last }) => {
   let action = 'next';
   let actionEvent = fetchQuestion;
 
   if (last) {
     action = 'submit';
-    actionEvent = showResult;
+    actionEvent = validateResponses;
   }
 
-  const { id } = question;
   const questionHtml = createQuestionHtml(question, action);
 
   const body = document.querySelector('body');
   body.innerHTML = questionHtml;
-  const actionElement = document.querySelector('#action');
-  actionElement.onclick = actionEvent;
 
+  const actionElement = document.querySelector('#action');
+  actionElement.addEventListener('click', () => storeResponse(question));
+  actionElement.addEventListener('click', actionEvent);
   return;
 };
 

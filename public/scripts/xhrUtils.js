@@ -16,7 +16,8 @@ const xhrPost = (path, onSuccess, onFailure, body = '', type = 'form') => {
   const types = {
     'form': "application/x-www-form-urlencoded",
     'text': 'text/plain',
-    'html': 'text/html'
+    'html': 'text/html',
+    'json': 'application/json'
   }
 
   const xhr = new XMLHttpRequest();
