@@ -1,7 +1,8 @@
-const { createApp } = require("./app.js");
+const { createApp } = require("./src/app.js");
 
 const startServer = (PORT) => {
   const app = createApp();
+
   app.listen(PORT, () => {
     console.log(`Listening on http://localhost:${PORT}`);
   });
