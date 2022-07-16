@@ -10,15 +10,6 @@ const joinHandler = (req, res) => {
   res.redirect('/contest.html');
 };
 
-const serveQuestion = (req, res, next) => {
-  const { id } = req.params;
-  const questionsPath = `./db/quiz/${id}.json`;
-  const quiz = readFile(questionsPath);
-  console.log('quizz', quiz.questions[id]);
-  res.json(quiz.questions[0]);
-  return;
-};
-
 const addPlayer = (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
@@ -27,6 +18,24 @@ const addPlayer = (req, res, next) => {
   const contest = contests[0];
   contest.players.push({ name, id: 1 });
   res.sendStatus(201);
+};
+
+const createServeQuestion = (questionsPath) => {
+  let id = 0;
+
+  const quiz = readFile(questionsPath);
+  return (req, res, next) => {
+    const question = quiz.questions[id];
+
+    if (id === quiz.questions.length - 1) {
+      res.json({ question, last: true });
+      return;
+    }
+
+    res.json({ question, last: false });
+    id++;
+    return;
+  };
 };
 
 const createApp = () => {
@@ -43,7 +52,7 @@ const createApp = () => {
 
   contestsRouter.get('/:id/join', joinHandler);
   contestsRouter.post('/:id/add-player', addPlayer);
-  contestsRouter.get('/:id', serveQuestion);
+  contestsRouter.get('/:id/', createServeQuestion(`./db/quiz/1.json`));
 
   app.use(express.static('./public'));
   return app;

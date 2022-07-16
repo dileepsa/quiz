@@ -1,8 +1,8 @@
-const xhrGet = (path, onSucces, onFailure, body = '') => {
+const xhrGet = (path, onSuccess, onFailure, body = '') => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status <= 299) {
-      onSucces(xhr);
+      onSuccess(xhr);
       return;
     }
     onFailure(xhr);
