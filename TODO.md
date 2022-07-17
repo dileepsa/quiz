@@ -8,6 +8,8 @@
 
 **DONE**
 
+- [x] Add cookies and sessions.
+- [x] Add multiplayer. 
 - [x] send the answers to backend for validation.
 - [x] Show the result of quiz.
 - [x] Store the answers.

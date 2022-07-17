@@ -12,15 +12,30 @@ const questionTemplate = ` <form id="questionform" name="questionform">
 </fieldset>
 <div><button type="button" id="action">__ACTION__</button></div>
 </form>`;
+
 const answers = [];
+
+const px = (text) => text + 'px';
+
+const createResultsHtml = (results) => {
+  const div = document.createElement('div');
+  const total = results.length;
+  const correctAnswers = results.filter(x => x.result).length;
+  div.innerText = `Correct : ${correctAnswers} out of ${total}`;
+  div.style.fontSize = px(70);
+  div.style.color = 'green'
+  div.style.textAlign = 'center';
+  return div;
+};
 
 const drawResults = (xhr) => {
   const body = document.querySelector('body');
 
-  const validations = JSON.parse(xhr.response);
-  const total = validations.length;
-  const correct = validations.filter(x => x.result).length;
-  body.innerHTML = `correct: ${correct} out of ${total}`
+  const results = JSON.parse(xhr.response);
+  const resultsHtml = createResultsHtml(results);
+  console.log('resultshtml', resultsHtml);
+  body.innerHTML = null;
+  body.appendChild(resultsHtml);
 }
 
 const validateResponses = () => {
@@ -31,9 +46,9 @@ const validateResponses = () => {
 
 const createQuestionHtml = (question, action) => {
   let content = questionTemplate.replace('__QUESTION__', question.question);
-
+  const options = question.options;
   for (let index = 0; index < question.options.length; index++) {
-    content = content.replace(`__OPTION${index + 1}__`, question.options[index].option);
+    content = content.replace(`__OPTION${index + 1}__`, options[index].option);
   }
 
   content = content.replace('__ACTION__', action);
