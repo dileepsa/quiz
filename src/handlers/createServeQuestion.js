@@ -10,8 +10,8 @@ const createServeQuestion = (questionsPath) => {
       return;
     }
 
-    res.json({ question, last: false });
     req.session.qid++;
+    res.json({ question, last: false });
     return;
   };
 };

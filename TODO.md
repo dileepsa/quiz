@@ -1,5 +1,7 @@
 **TODO**
 
+- [ ] Add quit player link.
+- [ ] Create a home page for quiz contests.
 - [ ] Model the player data.
 - [ ] Consider an entity for controlling quiz.
 - [ ] create Contests.
@@ -8,6 +10,8 @@
 
 **DONE**
 
+- [x] Use cookie-session middleware.
+- [x] Add morgan for logging.
 - [x] Add cookies and sessions.
 - [x] Add multiplayer. 
 - [x] send the answers to backend for validation.

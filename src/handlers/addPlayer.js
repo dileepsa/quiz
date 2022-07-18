@@ -1,14 +1,6 @@
 const { readFile } = require("./readFile.js");
 
-const createSession = (req, res) => {
-  const id = new Date().getTime().toString();
-  const time = new Date().getTime();
-  const { name } = req.body;
-  const session = { id, name, time, qid: 0 };
-  return session;
-};
-
-const addPlayer = (sessions) => (req, res, next) => {
+const addPlayer = (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -17,10 +9,7 @@ const addPlayer = (sessions) => (req, res, next) => {
   const contest = contests[0];
   contest.players.push({ name, id: 1 });
 
-  const session = createSession(req, res);
-  sessions[session.id] = session;
-
-  res.cookie('id', session.id);
+  req.session = { id: new Date().getTime().toString(), qid: 0 };
   res.sendStatus(201);
 };
 

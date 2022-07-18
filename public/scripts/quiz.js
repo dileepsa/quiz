@@ -33,7 +33,6 @@ const drawResults = (xhr) => {
 
   const results = JSON.parse(xhr.response);
   const resultsHtml = createResultsHtml(results);
-  console.log('resultshtml', resultsHtml);
   body.innerHTML = null;
   body.appendChild(resultsHtml);
 }
